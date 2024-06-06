@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+<head>
+    <title>Atenciones</title>
+</head>
+<body>
+<h1>Atenciones</h1>
+<form>
+    <label for="sucursal">Sucursal:</label>
+    <select id="sucursal" name="sucursal" th:field="*{sucursal}">
+        <option value="" disabled selected>Seleccione una sucursal</option>
+        <!-- Opciones de sucursales -->
+    </select>
+    <label for="tipoAtencion">Tipo de Atención:</label>
+    <select id="tipoAtencion" name="tipoAtencion" th:field="*{tipoAtencion}">
+        <option value="" disabled selected>Seleccione un tipo de atención</option>
+        <!-- Opciones de tipos de atención -->
+    </select>
+    <button type="submit">Buscar</button>
+</form>
+<table>
+    <thead>
+    <tr>
+        <th>Médico</th>
+        <th>Tipo de Atención</th>
+        <th>Mascota</th>
+        <th>Dueño</th>
+        <th>Hora</th>
+        <th>Box</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="atencion : ${atenciones}">
+        <td th:text="${atencion.medico}"></td>
+        <td th:text="${atencion.tipoAtencion}"></td>
+        <td th:text="${atencion.mascota}"></td>
+        <td th:text="${atencion.dueno}"></td>
+        <td th:text="${atencion.hora}"></td>
+        <td th:text="${atencion.box}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

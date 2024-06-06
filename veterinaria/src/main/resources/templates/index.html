@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org " lang="">
+<title>Veterinaria HappyPet</title>
+<body>
+<h1>Bienvenido a la Veterinaria HappyPet</h1>
+<nav>
+    <ul>
+        <li><a th:href="@{/api/reports/sucursal-medicos}">Sucursales y Médicos</a></li>
+        <li><a th:href="@{/api/reports/productos-inventario}">Inventario de Productos</a></li>
+        <li><a th:href="@{/api/reports/atencion-branch}">Atenciones por Sucursal</a></li>
+        <li><a th:href="@{/api/reports/all-pet-type}">Cantidad de Mascotas por Tipo</a></li>
+        <li><a th:href="@{/api/reports/surgery-branch}">Cirugías por Sucursal</a></li>
+    </ul>
+</nav>
+</body>
+</html>
