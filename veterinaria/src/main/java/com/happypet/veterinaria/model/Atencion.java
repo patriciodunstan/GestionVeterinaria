@@ -5,14 +5,23 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
+
 @Data
 @Entity
+@Table(name = "atencion")
 public class Atencion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "atencion_id")
     private Long id;
+
+    @Column(name = "fecha_realizacion")
     private LocalDateTime fechaRealizacion;
+
+    @Column(name = "fecha_proxima_revision")
     private LocalDateTime fechaProximaRevision;
+
+    @Column(name = "box_atencion")
     private String boxAtencion;
 
     @ManyToOne

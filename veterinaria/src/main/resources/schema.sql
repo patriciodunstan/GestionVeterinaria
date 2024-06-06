@@ -137,42 +137,40 @@ VALUES
 -- Consultas SQL para reportes de interés
 
 -- 1. Listar el nombre de una sucursal y sus médicos en base a su id.
-SET @sucursal_id = 1; -- Asigna el valor deseado aquí
 SELECT s.sucursal_nombre AS sucursal, m.medico_nombre AS medico
 FROM sucursal s
 JOIN medico_sucursal ms ON s.sucursal_id = ms.sucursal_id
 JOIN medico m ON ms.medico_id = m.medico_id
-WHERE s.sucursal_id = @sucursal_id;
-
+WHERE s.sucursal_id = ?;
 -- 2. Listar los productos del inventario de una sucursal en base al id de la sucursal.
-SET @sucursal_id = 1; -- Asigna el valor deseado aquí
 SELECT i.inventario_nombre AS producto, i.inventario_marca AS marca, i.inventario_existencia AS stock
 FROM inventario i
-WHERE i.sucursal_id = @sucursal_id;
+WHERE i.sucursal_id = ?;
 
 -- 3. Listar todas las mascotas indicando nombre, qué tipo de atención que tuvieron (médica o cirugía), y debe ser utilizado el id de la sucursal para filtrar la información.
-SET @sucursal_id = 1; -- Asigna el valor deseado aquí
 SELECT m.mascota_nombre AS mascota, ta.tipo_atencion_descripcion AS atencion
 FROM mascota m
 JOIN atencion a ON m.mascota_id = a.mascota_id
 JOIN tipo_atencion ta ON a.tipo_atencion_id = ta.tipo_atencion_id
-WHERE a.sucursal_id = @sucursal_id;
+WHERE a.sucursal_id = ?;
+
 
 -- 4. Listar la cantidad de mascotas atendidas por tipo de mascota que tiene cada sucursal.
 SELECT s.sucursal_nombre AS sucursal, tm.tipo_mascota_descripcion AS tipo_mascota, COUNT(m.mascota_id) AS cantidad
 FROM sucursal s
-JOIN mascota m ON s.sucursal_id = m.sucursal_id
+JOIN atencion a ON s.sucursal_id = a.sucursal_id
+JOIN mascota m ON a.mascota_id = m.mascota_id
 JOIN tipo_mascota tm ON m.tipo_mascota_id = tm.tipo_mascota_id
 GROUP BY s.sucursal_nombre, tm.tipo_mascota_descripcion;
 
+
 -- 5. Agrupar la cantidad de cirugías que se han realizado en una sucursal determinada, mostrando cantidad, el nombre del médico y la sucursal, estableciendo el orden de forma descendiente por la cantidad de cirugías de los 10 médicos.
-SET @sucursal_id = 1; -- Asigna el valor deseado aquí
 SELECT s.sucursal_nombre AS sucursal, m.medico_nombre AS medico, COUNT(a.atencion_id) AS cantidad_cirugias
 FROM atencion a
 JOIN medico m ON a.medico_id = m.medico_id
 JOIN sucursal s ON a.sucursal_id = s.sucursal_id
 WHERE a.tipo_atencion_id = (SELECT tipo_atencion_id FROM tipo_atencion WHERE tipo_atencion_descripcion = 'Cirugia')
-AND s.sucursal_id = @sucursal_id
 GROUP BY s.sucursal_nombre, m.medico_nombre
 ORDER BY cantidad_cirugias DESC
 LIMIT 10;
+

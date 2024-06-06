@@ -1,22 +1,33 @@
 package com.happypet.veterinaria.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
 
-    @Data
-    @Entity
-    public class Dueno {
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long id;
 
-        private String rut;
-        private String nombre;
-        private String apellidos;
-        private String email;
-    }
+@Data
+@Entity
+@Table(name = "dueno")
+public class Dueno {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "dueno_id")
+    private Long id;
+
+    @Column(name = "dueno_rut")
+    private String rut;
+
+    @Column(name = "dueno_nombre")
+    private String nombre;
+
+    @Column(name = "dueno_apellidos")
+    private String apellidos;
+
+    @Column(name = "dueno_email")
+    private String email;
+
+    @OneToMany(mappedBy = "dueno")
+    private List<Mascota> mascotas;
+}
 
