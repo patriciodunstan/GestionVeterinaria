@@ -76,7 +76,7 @@ veterinaria/
 
 ### Prerrequisitos
 
-- JDK 22
+- JDK 17
 - Maven
 - MySQL
 
