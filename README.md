@@ -1,6 +1,6 @@
 # Veterinaria HappyPet
 
-## Descripción
+## Descripción 
 
 Este proyecto es una aplicación web para la gestión de una veterinaria, desarrollada con Spring Boot. Incluye funcionalidades de seguridad, controladores para manejo de reportes y un esquema básico de base de datos.
 
